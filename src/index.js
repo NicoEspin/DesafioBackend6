@@ -8,17 +8,23 @@ import MongoStore from "connect-mongo";
 import userRouter from "./routes/users.routes.js";
 import productRouter from "./routes/products.routes.js";
 import sessionRouter from "./routes/session.routes.js";
+import Handlebars from "handlebars";
 
 const app = express();
 const PORT = 4000;
 
-app.engine(
-  ".hbs",
-  exphbs({
-    extname: ".hbs",
-    defaultLayout: "register",
-  })
-);
+const hbs = exphbs.create({
+  handlebars: Handlebars,
+
+  runtimeOptions: {
+    allowProtoPropertiesByDefault: true,
+
+    allowProtoMethodsByDefault: true,
+  },
+});
+
+app.engine("handlebars", hbs.engine);
+
 app.set("view engine", ".hbs");
 
 //BDD

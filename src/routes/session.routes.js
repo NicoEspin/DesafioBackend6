@@ -1,7 +1,9 @@
 import { Router } from "express";
 import { userModel } from "../models/users.models.js";
+import { getLoginPage } from "../controllers/session.controller.js";
 
 const sessionRouter = Router()
+sessionRouter.get('/', getLoginPage);
 
 sessionRouter.post('/login', async (req, res) => {
     const { email, password } = req.body
